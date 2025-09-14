@@ -1,4 +1,4 @@
-import React, { use } from 'react';
+import React, { use, useState } from 'react';
 import { Link, useNavigate } from 'react-router';
 import { AuthContext } from '../../AuthProvider/AuthContext';
 import { GoogleAuthProvider } from 'firebase/auth';
@@ -9,6 +9,8 @@ const SignUp = () => {
     const { createUser, createUser2 } = use(AuthContext)
     const navigate = useNavigate()
     const provider = new GoogleAuthProvider()
+    const [password, setPassword] = useState('')
+    const [error, setError] = useState('')
 
     const handleSignUp = (e) => {
         e.preventDefault()
@@ -31,13 +33,37 @@ const SignUp = () => {
 
     const handleGoogleSignUp = () => {
         createUser2(provider)
-        .then(result=>{
-            console.log(result)
-            navigate('/')
-        })
-        .catch(error=>{
-            console.log(error)
-        })
+            .then(result => {
+                console.log(result)
+                navigate('/')
+            })
+            .catch(error => {
+                console.log(error)
+            })
+    }
+
+    const handlePasswordChange = (e) => {
+        const pass = e.target.value;
+        setPassword(pass)
+         if (pass.length < 6) {
+            setError("Password must be at least 6 characters long.");
+            return;
+        }
+
+        if (!/[A-Z]/.test(pass)) {
+            setError("Password must contain at least one uppercase letter.");
+            return;
+        }
+
+        if (!/[a-z]/.test(pass)) {
+            setError("Password must contain at least one lowercase letter.");
+            return;
+        }
+        else {
+            setError("");
+            return;
+        }
+
     }
 
     return (
@@ -57,7 +83,10 @@ const SignUp = () => {
                             <input type="text" className="input" name='photoUrl' placeholder="Photo URL" />
 
                             <label className="label">Password</label>
-                            <input type="password" className="input" name='password' placeholder="Password" />
+                            <input type="password" className="input" name='password' value={password} onChange={handlePasswordChange} placeholder="Password" />
+                            {
+                                error && <p className='text-red-500'>{error}</p>
+                            }
 
                             <div><a className="link link-hover">Forgot password?</a></div>
                             <button className="btn btn-active mt-4">Sign Up</button>
