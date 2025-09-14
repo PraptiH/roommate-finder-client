@@ -1,11 +1,13 @@
 import React, { use } from 'react';
 import { Link, useNavigate } from 'react-router';
 import { AuthContext } from '../../AuthProvider/AuthContext';
+import { GoogleAuthProvider } from 'firebase/auth';
 
 const SignIn = () => {
 
-    const {signInUser} = use(AuthContext)
+    const { signInUser, createUser2 } = use(AuthContext)
     const navigate = useNavigate()
+    const provider = new GoogleAuthProvider()
 
     const handleSignIn = (e) => {
         e.preventDefault()
@@ -15,6 +17,17 @@ const SignIn = () => {
         console.log(info)
 
         signInUser(email, password)
+            .then(result => {
+                console.log(result)
+                navigate('/')
+            })
+            .catch(error => {
+                console.log(error)
+            })
+    }
+
+    const handleGoogleSignIn = () => {
+        createUser2(provider)
             .then(result => {
                 console.log(result)
                 navigate('/')
@@ -38,7 +51,7 @@ const SignIn = () => {
                             <div><a className="link link-hover">Forgot password?</a></div>
                             <button className="btn btn-active mt-4">Sign In</button>
                             <p className='text-center font-semibold text-sm'>OR</p>
-                            <button className="btn btn-active ">Sign In with Google</button>
+                            <button onClick={handleGoogleSignIn} className="btn btn-active ">Sign In with Google</button>
                             <p className='font-medium text-sm '>Do not have an account? <Link className='text-blue-600' to="/signup">Sign Up</Link></p>
                         </form>
                     </div>

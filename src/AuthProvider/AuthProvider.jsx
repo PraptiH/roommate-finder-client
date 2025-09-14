@@ -1,5 +1,5 @@
 import React from 'react';
-import { createUserWithEmailAndPassword,  signInWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword,  signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import {auth} from '../firebase/firebase.init'
 import { AuthContext } from './AuthContext';
 
@@ -10,12 +10,17 @@ const AuthProvider =({children})=>{
         return createUserWithEmailAndPassword(auth, email,password)
     }
 
+    const createUser2 =(provider)=>{
+        return signInWithPopup(auth, provider)
+    }
+
     const signInUser = (email, password)=>{
         return signInWithEmailAndPassword(auth, email, password)
     }
 
     const authData = {
         createUser,
+        createUser2,
         signInUser,
     };
 
