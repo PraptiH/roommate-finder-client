@@ -30,6 +30,26 @@ const SignIn = () => {
         createUser2(provider)
             .then(result => {
                 console.log(result)
+                const user = result.user;
+                const userProfile = {
+                    name: user?.displayName,
+                    email: user?.email,
+                    photoURL: user?.photoURL,
+                    creationTime: user?.metadata.creationTime,
+                    lastSignInTime: user?.metadata.lastSignInTime
+                };
+
+                fetch('http://localhost:3000/users', {
+                    method: "POST",
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify(userProfile)
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        console.log("After save data", data)
+                    })
                 navigate('/')
             })
             .catch(error => {
