@@ -11,6 +11,7 @@ import PrivateRoute from "../components/PrivateRoute/PrivateRoute"
 import FindRoommate from "../pages/FindRoommate/FindRoommate"
 import BrowseListing from "../pages/BrowseListing/BrowseListing"
 import MyListing from "../pages/MyListing/MyListing"
+import PostDetails from "../pages/PostDetails/PostDetails"
 
 export const router = createBrowserRouter([
     {
@@ -42,7 +43,13 @@ export const router = createBrowserRouter([
             {
                 path: '/myListing',
                 element: <PrivateRoute><MyListing/></PrivateRoute>
-            }
+            },
+            {
+                path: '/posts/:id',
+                loader:({params})=>fetch(`http://localhost:3000/posts/${params.id}`),
+                element:<PrivateRoute><PostDetails></PostDetails></PrivateRoute>
+            },
+            
         ]
     }
 ])

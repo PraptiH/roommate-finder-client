@@ -1,5 +1,6 @@
 import React from 'react';
 import room from '../../assets/Room.jpg';
+import { Link } from 'react-router';
 
 const PostCard = ({ post }) => {
 
@@ -13,7 +14,9 @@ const PostCard = ({ post }) => {
                     <p className='text-xl font-bold text-green-600'>{post.rentAmount}</p>
                 </div>
                 <p className='text-gray-600 text-sm line-clamp-3'>{post.description}</p>
-               <button className='btn'>Details</button>
+                <Link to={`/posts/${post._id}`}>
+                    <button className='btn'>Details</button>
+                </Link>
             </div>
         </div>
     );
