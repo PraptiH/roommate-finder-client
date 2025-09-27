@@ -1,12 +1,12 @@
-import React ,{use}from 'react';
+import React, { use } from 'react';
 import { useLoaderData, useNavigate } from 'react-router';
 import { AuthContext } from '../../AuthProvider/AuthContext';
-
+import Swal from 'sweetalert2';
 
 const UpdatePost = () => {
 
     const { _id, rentAmount, availability, lifestylePreference, description, contactInfo, location } = useLoaderData()
-    const {user} = use(AuthContext)
+    const { user } = use(AuthContext)
     const navigate = useNavigate()
 
     const updatePost = e => {
@@ -25,7 +25,15 @@ const UpdatePost = () => {
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data)
+                if (data.modifiedCount) {
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: "Updated Successfully",
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                }
                 navigate('/')
             })
     }
@@ -39,20 +47,20 @@ const UpdatePost = () => {
                         <form onSubmit={updatePost} className="fieldset">
 
                             <label className="label">Location</label>
-                            <input type="text" className="input" name='location' defaultValue={location}  placeholder="Location" />
+                            <input type="text" className="input" name='location' defaultValue={location} placeholder="Location" />
 
                             <label className="label">Rent Amount</label>
                             <input type="text" className="input" name='rentAmount' defaultValue={rentAmount} placeholder="Rent Amount" />
 
                             <label className="label">Room Type</label>
-                            <select name='roomType'  className="select">
+                            <select name='roomType' className="select">
                                 <option value="">Room Type</option>
                                 <option>Single</option>
                                 <option>Shared</option>
                             </select>
 
                             <label className="label">Lifestyle Preference</label>
-                            <select name='lifestylePreference' defaultValue={lifestylePreference}  className="select">
+                            <select name='lifestylePreference' defaultValue={lifestylePreference} className="select">
                                 <option value="">Lifestyle Preference</option>
                                 <option>Pets</option>
                                 <option>Non-smoker</option>

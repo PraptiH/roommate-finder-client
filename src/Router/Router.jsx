@@ -44,7 +44,6 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/myListing',
-                loader: () => fetch(`http://localhost:3000/users`),
                 element: <PrivateRoute><MyListing /></PrivateRoute>
             },
             {

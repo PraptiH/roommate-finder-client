@@ -1,9 +1,12 @@
 import React, { use } from 'react';
 import { AuthContext } from '../../AuthProvider/AuthContext';
+import Swal from 'sweetalert2'
+import { useNavigate } from 'react-router';
 
 const FindRoommate = () => {
 
-    const {user} = use(AuthContext)
+    const { user } = use(AuthContext)
+    const navigate = useNavigate()
 
     const handleFindRoommate = e => {
         e.preventDefault()
@@ -12,17 +15,24 @@ const FindRoommate = () => {
         const newPost = Object.fromEntries(formData.entries())
         console.log(newPost)
 
-        fetch(`http://localhost:3000/posts`,{
-            method : "POST",
+        fetch(`http://localhost:3000/posts`, {
+            method: "POST",
             headers: {
-                'content-type' : "application/json"
+                'content-type': "application/json"
             },
-            body : JSON.stringify(newPost)
+            body: JSON.stringify(newPost)
         })
-        .then(res=>res.json())
-        .then(data=>{
-            console.log(data)
-        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.insertedId) {
+                    Swal.fire({
+                        title: "Your post has been Added!",
+                        icon: "success",
+                        draggable: true
+                    });
+                }
+                navigate('/')
+            })
     }
 
     return (
