@@ -53,7 +53,7 @@ const MyListing = () => {
                                         </td>
 
                                         <th className='flex gap-5'>
-                                            <Link to={`/posts/${post._id}`}>
+                                            <Link to={`/updatepost/${post._id}`}>
                                                 <button className='btn text-sm'>Update</button>
                                             </Link>
                                             <Link to={`/posts/${post._id}`}>
