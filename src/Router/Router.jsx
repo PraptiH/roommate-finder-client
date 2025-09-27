@@ -33,23 +33,24 @@ export const router = createBrowserRouter([
                 Component: SignIn
             },
             {
-                path:'/browseListing',
+                path: '/browseListing',
+                loader: () => fetch(`http://localhost:3000/posts`),
                 Component: BrowseListing
             },
             {
                 path: '/findRoommate',
-                element: <PrivateRoute><FindRoommate/></PrivateRoute>
+                element: <PrivateRoute><FindRoommate /></PrivateRoute>
             },
             {
                 path: '/myListing',
-                element: <PrivateRoute><MyListing/></PrivateRoute>
+                element: <PrivateRoute><MyListing /></PrivateRoute>
             },
             {
                 path: '/posts/:id',
-                loader:({params})=>fetch(`http://localhost:3000/posts/${params.id}`),
-                element:<PrivateRoute><PostDetails></PostDetails></PrivateRoute>
+                loader: ({ params }) => fetch(`http://localhost:3000/posts/${params.id}`),
+                element: <PrivateRoute><PostDetails></PostDetails></PrivateRoute>
             },
-            
+
         ]
     }
 ])

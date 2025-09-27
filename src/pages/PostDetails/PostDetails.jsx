@@ -2,6 +2,7 @@ import React from 'react';
 import { useLoaderData } from 'react-router';
 import room from '../../assets/Room.jpg'
 
+
 const PostDetails = () => {
     const post = useLoaderData();
     console.log(post)
