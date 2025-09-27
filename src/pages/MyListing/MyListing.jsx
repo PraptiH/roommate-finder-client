@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useLoaderData } from 'react-router';
-// import profile from '../../assets/profile.jpg'
+
 
 const MyListing = () => {
-    // const { createUser, createUser2 } = use(AuthContext)
-    // console.log(createUser, createUser2)
+
 
     const users = useLoaderData();
     const [posts, setPosts] = useState([]);
@@ -17,6 +16,20 @@ const MyListing = () => {
                 console.log(data)
             })
     }, [])
+
+    const handleDelete = (id) => {
+        console.log(id)
+        fetch(`http://localhost:3000/posts/${id}`,{
+            method : 'DELETE'
+        })
+        .then(res=>res.json())
+        .then(data=>{
+            console.log("deleted")
+            const remainingPost = posts.filter(post=>post._id !== data._id)
+            setPosts(remainingPost)
+        }
+        )
+    }
 
     return (
         <div className='w-11/12 mx-auto my-20'>
@@ -56,9 +69,9 @@ const MyListing = () => {
                                             <Link to={`/updatepost/${post._id}`}>
                                                 <button className='btn text-sm'>Update</button>
                                             </Link>
-                                            <Link to={`/posts/${post._id}`}>
-                                                <button className='btn text-sm'>Delete</button>
-                                            </Link>
+
+                                            <button onClick={()=>handleDelete(post._id)} className='btn text-sm'>Delete</button>
+
                                         </th>
                                     </tr>
                                 )
