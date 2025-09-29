@@ -14,7 +14,6 @@ const MyListing = () => {
             .then(res => res.json())
             .then(data => {
                 setPosts(data)
-                console.log(data)
             })
     }, [])
 
@@ -93,7 +92,7 @@ const MyListing = () => {
                                         </td>
 
                                         <th className='flex gap-5'>
-                                            <Link to={`/ updatepost / ${post._id}`}>
+                                            <Link to={`/updatepost/${post._id}`}>
                                                 <button className='btn text-sm'>Update</button>
                                             </Link>
 

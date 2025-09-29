@@ -1,4 +1,4 @@
-import React, { use } from 'react';
+import React, { use, useState, useEffect } from 'react';
 import { useLoaderData, useNavigate } from 'react-router';
 import { AuthContext } from '../../AuthProvider/AuthContext';
 import Swal from 'sweetalert2';
@@ -8,6 +8,21 @@ const UpdatePost = () => {
     const { _id, rentAmount, availability, lifestylePreference, description, contactInfo, location } = useLoaderData()
     const { user } = use(AuthContext)
     const navigate = useNavigate()
+
+    const [emailUser, setEmailUser] = useState(null)
+
+
+    useEffect(() => {
+        if (user?.email) {
+            fetch(`http://localhost:3000/users?email=${user.email}`)
+                .then(res => res.json())
+                .then(data => {
+                    const currentUser = data.find(u => u.email === user.email);
+                    setEmailUser(currentUser);
+                })
+                .catch(e => console.error(e))
+        }
+    }, [user?.email])
 
     const updatePost = e => {
         e.preventDefault()
@@ -81,7 +96,7 @@ const UpdatePost = () => {
 
                             <label className="label">Name</label>
                             {
-                                user && <input type="name" defaultValue={user.displayName || user.name} className="input" name='name' readOnly />
+                                emailUser && <input type="text" defaultValue={emailUser.name} className="input" name='name' readOnly />
                             }
 
                             <label className="label">Email</label>

@@ -6,6 +6,8 @@ import Footer from '../../components/Footer/Footer';
 const RootLayout = () => {
     return (
         <div>
+            {/* Theme controller - available on all pages */}
+           
             <Navbar></Navbar>
             <Outlet></Outlet>
             <Footer></Footer>

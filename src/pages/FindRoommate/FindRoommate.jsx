@@ -1,12 +1,26 @@
-import React, { use } from 'react';
+import React, { use, useState, useEffect } from 'react';
 import { AuthContext } from '../../AuthProvider/AuthContext';
 import Swal from 'sweetalert2'
 import { useNavigate } from 'react-router';
+import { Tooltip } from 'react-tooltip'
 
 const FindRoommate = () => {
 
     const { user } = use(AuthContext)
+    const [emailUser, setEmailUser] = useState(null)
     const navigate = useNavigate()
+
+    useEffect(() => {
+        if (user?.email) {
+            fetch(`http://localhost:3000/users?email=${user.email}`)
+                .then(res => res.json())
+                .then(data => {
+                    const currentUser = data.find(u => u.email === user.email);
+                    setEmailUser(currentUser);
+                })
+                .catch(e => console.error(e))
+        }
+    }, [user?.email])
 
     const handleFindRoommate = e => {
         e.preventDefault()
@@ -31,7 +45,7 @@ const FindRoommate = () => {
                         draggable: true
                     });
                 }
-                navigate('/')
+                navigate('/home')
             })
     }
 
@@ -64,7 +78,8 @@ const FindRoommate = () => {
                             </select>
 
                             <label className="label">Description</label>
-                            <textarea name='description' className="textarea" required placeholder="Description"></textarea>
+                            <textarea data-tooltip-id='description-tooltip' data-tooltip-content="Share some information of your room and your requirements" name='description' className="textarea" required placeholder="Description"></textarea>
+                            <Tooltip id='description-tooltip' />
 
                             <label className="label">Contact Info</label>
                             <input type="text" className="input" name='contactInfo' required placeholder="Contact Info" />
@@ -78,17 +93,13 @@ const FindRoommate = () => {
 
                             <label className="label">Name</label>
                             {
-                                user && <input type="name" defaultValue={user.displayName || user.name} className="input" name='name' readOnly />
+                                emailUser && <input type="text" defaultValue={emailUser.name} className="input" name='name' readOnly />
                             }
 
                             <label className="label">Email</label>
                             {
                                 user && <input type="email" defaultValue={user.email} className="input" name='email' readOnly />
                             }
-
-
-
-
                             <button className="btn btn-active mt-4 font-semibold text-2xl">Post</button>
 
                         </form>
