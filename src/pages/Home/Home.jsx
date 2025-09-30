@@ -3,7 +3,7 @@ import PostCard from '../../components/PostCard/PostCard';
 import homie1 from '../../assets/homie1.jpg'
 import homie2 from '../../assets/homie2.jpg'
 import homie3 from '../../assets/homie3.jpg'
-import { Fade, Zoom, Slide } from "react-awesome-reveal";
+import { Fade, Slide } from "react-awesome-reveal";
 
 const Home = () => {
 
@@ -82,6 +82,25 @@ const Home = () => {
                                 post={post}>
                             </PostCard>)
                     }
+                </div>
+            </div>
+
+            <div className='mt-10 w-11/12 mx-auto'>
+                <h1 className='text-3xl font-bold text-center mb-8 text-gray-800'>Frequently Asked Question</h1>
+                <div className="collapse collapse-arrow bg-base-100 border border-base-300">
+                    <input type="radio" name="my-accordion-2" defaultChecked />
+                    <div className="collapse-title font-semibold">Is using this platform free?</div>
+                    <div className="collapse-content text-sm">Yes, creating an account and browsing roommate posts is completely free. You only pay your share of rent and bills directly to your roommate/landlord.</div>
+                </div>
+                <div className="collapse collapse-arrow bg-base-100 border border-base-300">
+                    <input type="radio" name="my-accordion-2" />
+                    <div className="collapse-title font-semibold">How do I contact a roommate or landlord?</div>
+                    <div className="collapse-content text-sm">You can view the contact details provided in each post to safely contact with them.</div>
+                </div>
+                <div className="collapse collapse-arrow bg-base-100 border border-base-300">
+                    <input type="radio" name="my-accordion-2" />
+                    <div className="collapse-title font-semibold">Can I post my own listing?</div>
+                    <div className="collapse-content text-sm">Absolutely! Once you sign in, you can create a new post by sharing details like location, rent, and availability.</div>
                 </div>
             </div>
         </div>
