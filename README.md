@@ -1,12 +1,15 @@
-# React + Vite
+Homies
+A web application to help users find and post available rooms and roommates easily.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+ Live Site
+[Visit the  Site](https://roommate-finder-84939.web.app/)
 
-Currently, two official plugins are available:
+ Features
+1. Room Search – Browse through available posts to find roommates or rooms for rent.
+2. Post Your Own Listing – Users can create a post with details like name, location, rent, and availability.
+3. Featured Posts Section – Home page highlights 6 available posts using MongoDB’s `limit` operator.
+4. Authentication – Sign in with email/password or Google to post and manage listings.
+5. Interactive UI – Includes banner/slider, smooth animations, and responsive design.
+6. Extra Sections** – FAQs, location highlights o for users.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
