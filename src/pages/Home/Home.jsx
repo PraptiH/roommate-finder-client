@@ -4,6 +4,10 @@ import homie1 from '../../assets/homie1.jpg'
 import homie2 from '../../assets/homie2.jpg'
 import homie3 from '../../assets/homie3.jpg'
 import { Fade, Slide } from "react-awesome-reveal";
+import Dhaka from '../../assets/Dhaka.jpg'
+import Chittagong from '../../assets/chittagong.jpg'
+import Saidpur from '../../assets/Saidpur.jpg'
+import Sylhet from '../../assets/sylhet.jpg'
 
 const Home = () => {
 
@@ -82,6 +86,28 @@ const Home = () => {
                                 post={post}>
                             </PostCard>)
                     }
+                </div>
+            </div>
+
+            <div className='mt-10 w-11/12 mx-auto'>
+                <h1 className='text-3xl font-bold text-center mb-8 text-gray-800'>Find Out Your Desired Location </h1>
+                <div className='flex gap-4'>
+                    <div>
+                        <img className='rounded-xl w-full h-60' src={Dhaka} alt="" />
+                        <p className='text-center font-medium text-lg'>Dhaka</p>
+                    </div>
+                    <div>
+                        <img className='rounded-xl w-full h-60' src={Chittagong} alt="" />
+                        <p className='text-center font-medium text-lg'>Chittagong</p>
+                    </div>
+                    <div>
+                        <img className='rounded-xl w-full h-60' src={Saidpur} alt="" />
+                        <p className='text-center font-medium text-lg'>Saidpur</p>
+                    </div>
+                    <div>
+                        <img className='rounded-xl w-full h-60' src={Sylhet} alt="" />
+                        <p className='text-center font-medium text-lg'>Sylhet</p>
+                    </div>
                 </div>
             </div>
 
